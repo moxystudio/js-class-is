@@ -4,11 +4,14 @@
   "description": "Enhances a JavaScript class by adding an is<Class> property to compare types between realms.",
   "keywords": [
     "addis",
+    "add-is",
     "isclass",
-    "class",
+    "is-class",
     "decorator",
     "symbols",
-    "realms"
+    "realms",
+    "instanceof"
+    "instance-of"
   ],
   "author": "Diogo Silva <fsdiogo@gmail.com>",
   "homepage": "https://github.com/moxystudio/js-is-class-decorator",
