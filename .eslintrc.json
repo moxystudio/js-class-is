@@ -1,0 +1,8 @@
+{
+    "root": true,
+    "extends": [
+        "eslint-config-moxy/es6",
+        "eslint-config-moxy/addons/es6-modules",
+        "eslint-config-moxy/addons/jest"
+    ]
+}
