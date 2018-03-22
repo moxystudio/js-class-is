@@ -10,7 +10,7 @@
     "decorator",
     "symbols",
     "realms",
-    "instanceof"
+    "instanceof",
     "instance-of"
   ],
   "author": "Diogo Silva <fsdiogo@gmail.com>",
