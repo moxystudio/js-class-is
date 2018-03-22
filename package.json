@@ -1,6 +1,6 @@
 {
   "name": "is-class-decorator",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Enhances a JavaScript class by adding an is<Class> property to compare types between realms.",
   "keywords": [
     "addis",
