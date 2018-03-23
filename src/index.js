@@ -1,18 +1,16 @@
-function addIs({ name, symbol }) {
-    const symbolFor = Symbol.for(symbol);
+function withIs(Class, { className, symbolName }) {
+    const symbol = Symbol.for(symbolName);
 
-    return (Class) => {
-        class NewClass extends Class {
-            constructor(...args) {
-                super(...args);
-                Object.defineProperty(this, symbolFor, { value: true });
-            }
+    class NewClass extends Class {
+        constructor(...args) {
+            super(...args);
+            Object.defineProperty(this, symbol, { value: true });
         }
+    }
 
-        NewClass[`is${name}`] = (obj) => obj && Boolean(obj[symbolFor]);
+    NewClass[`is${className}`] = (obj) => obj && Boolean(obj[symbol]);
 
-        return NewClass;
-    };
+    return NewClass;
 }
 
-export default addIs;
+export default withIs;
