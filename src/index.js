@@ -1,15 +1,15 @@
-function addIs(name) {
-    return (Class) => {
-        const symbol = Symbol.for(`add-is/${name}`);
+function addIs({ name, symbol }) {
+    const symbolFor = Symbol.for(symbol);
 
+    return (Class) => {
         class NewClass extends Class {
             constructor(...args) {
                 super(...args);
-                this[symbol] = true;
+                Object.defineProperty(this, symbolFor, { value: true });
             }
         }
 
-        NewClass[`is${name}`] = (obj) => obj && Boolean(obj[symbol]);
+        NewClass[`is${name}`] = (obj) => obj && Boolean(obj[symbolFor]);
 
         return NewClass;
     };
