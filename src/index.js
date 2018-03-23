@@ -4,7 +4,11 @@ function withIs(Class, { className, symbolName }) {
     class NewClass extends Class {
         constructor(...args) {
             super(...args);
-            Object.defineProperty(this, symbol, { value: true, enumerable: false });
+            Object.defineProperty(this, symbol, { value: true });
+        }
+
+        get [Symbol.toStringTag]() {
+            return className;
         }
     }
 
