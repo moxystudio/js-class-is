@@ -34,7 +34,7 @@ So the solution is to use symbols.
 
 ```js
 // Package X
-import withIs from 'is-class-decorator';
+import withIs from 'class-is';
 
 class Person {
     constructor(name, city) {
@@ -46,6 +46,8 @@ class Person {
 export default withIs(Person, { className: 'Person', symbolName: '@org/package-x/person' });
 
 // Package Y
+import withIs from 'class-is';
+
 class Animal {
     constructor(species) {
         this.species = species;
