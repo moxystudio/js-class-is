@@ -26,3 +26,7 @@ test('person is an instance of Person class', () => {
 test('wolf is not an instance of Person class', () => {
     expect(PersonWithType.isPerson(wolf)).toBe(false);
 });
+
+test('check custom tag of Person class', () => {
+    expect(Object.prototype.toString.call(diogo)).toBe('[object Person]');
+});
