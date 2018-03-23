@@ -1,4 +1,4 @@
-import addIs from '../src';
+import withIs from '../src';
 
 class Person {
     constructor(name, city) {
@@ -13,8 +13,8 @@ class Animal {
     }
 }
 
-const PersonWithType = addIs('Person')(Person);
-const AnimalWithType = addIs('Animal')(Animal);
+const PersonWithType = withIs(Person, { className: 'Person', symbolName: '@org/package-x/person' });
+const AnimalWithType = withIs(Animal, { className: 'Animal', symbolName: '@org/package-y/animal' });
 
 const diogo = new PersonWithType('Diogo', 'Porto');
 const wolf = new AnimalWithType('Wolf');

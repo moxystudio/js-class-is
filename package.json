@@ -1,5 +1,5 @@
 {
-  "name": "is-class-decorator",
+  "name": "class-is",
   "version": "0.1.1",
   "description": "Enhances a JavaScript class by adding an is<Class> property to compare types between realms.",
   "keywords": [
@@ -14,10 +14,10 @@
     "instance-of"
   ],
   "author": "Diogo Silva <fsdiogo@gmail.com>",
-  "homepage": "https://github.com/moxystudio/js-is-class-decorator",
+  "homepage": "https://github.com/moxystudio/js-class-is",
   "repository": {
     "type": "git",
-    "url": "git@github.com:moxystudio/js-is-class-decorator.git"
+    "url": "git@github.com:moxystudio/js-class-is.git"
   },
   "license": "MIT",
   "main": "lib/index.js",
@@ -64,5 +64,6 @@
     "jest": "^22.4.3",
     "lint-staged": "^7.0.0",
     "standard-version": "^4.3.0"
-  }
+  },
+  "dependencies": {}
 }
