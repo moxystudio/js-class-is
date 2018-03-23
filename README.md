@@ -92,7 +92,7 @@ The name of the class your passing.
 
 Type: `String`
 
-Unique *id* for the class. This should be name spaced so different classes from different modules do not collide and give false positives.
+Unique *id* for the class. This should be namespaced so different classes from different modules do not collide and give false positives.
 
 Example: `@organization/package/class`
 
