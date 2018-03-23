@@ -1,19 +1,19 @@
-# is-class-decorator
+# class-is
 
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url] [![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
 
-[npm-url]:https://npmjs.org/package/is-class-decorator
-[downloads-image]:http://img.shields.io/npm/dm/is-class-decorator.svg
-[npm-image]:http://img.shields.io/npm/v/is-class-decorator.svg
-[travis-url]:https://travis-ci.org/moxystudio/js-is-class-decorator
-[travis-image]:http://img.shields.io/travis/moxystudio/js-is-class-decorator/master.svg
-[codecov-url]:https://codecov.io/gh/moxystudio/js-is-class-decorator
-[codecov-image]:https://img.shields.io/codecov/c/github/moxystudio/js-is-class-decorator/master.svg
-[david-dm-url]:https://david-dm.org/moxystudio/js-is-class-decorator
-[david-dm-image]:https://img.shields.io/david/moxystudio/js-is-class-decorator.svg
-[david-dm-dev-url]:https://david-dm.org/moxystudio/js-is-class-decorator?type=dev
-[david-dm-dev-image]:https://img.shields.io/david/dev/moxystudio/js-is-class-decorator.svg
-[greenkeeper-image]:https://badges.greenkeeper.io/moxystudio/js-is-class-decorator.svg
+[npm-url]:https://npmjs.org/package/class-is
+[downloads-image]:http://img.shields.io/npm/dm/class-is.svg
+[npm-image]:http://img.shields.io/npm/v/class-is.svg
+[travis-url]:https://travis-ci.org/moxystudio/js-class-is
+[travis-image]:http://img.shields.io/travis/moxystudio/js-class-is/master.svg
+[codecov-url]:https://codecov.io/gh/moxystudio/js-class-is
+[codecov-image]:https://img.shields.io/codecov/c/github/moxystudio/js-class-is/master.svg
+[david-dm-url]:https://david-dm.org/moxystudio/js-class-is
+[david-dm-image]:https://img.shields.io/david/moxystudio/js-class-is.svg
+[david-dm-dev-url]:https://david-dm.org/moxystudio/js-class-is?type=dev
+[david-dm-dev-image]:https://img.shields.io/david/dev/moxystudio/js-class-is.svg
+[greenkeeper-image]:https://badges.greenkeeper.io/moxystudio/js-class-is.svg
 [greenkeeper-url]:https://greenkeeper.io/
 
 Enhances a JavaScript class by adding an `is<Class>` property to compare types between realms.
@@ -28,13 +28,13 @@ So the solution is to use symbols.
 
 ## Installation
 
-`$ npm install is-class-decorator`
-
+`$ npm install class-is`
 
 ## Usage
 
 ```js
-import addIs from 'is-class-decorator';
+// Package X
+import withIs from 'is-class-decorator';
 
 class Person {
     constructor(name, city) {
@@ -43,20 +43,26 @@ class Person {
     }
 }
 
+export default withIs(Person, { className: 'Person', symbolName: '@org/package-x/person' });
+
+// Package Y
 class Animal {
     constructor(species) {
         this.species = species;
     }
 }
 
-const PersonWithType = addIs('Person')(Person);
-const AnimalWithType = addIs('Animal')(Animal);
+export default withIs(Animal, { className: 'Animal', symbolName: '@org/package-y/animal' });
 
-const diogo = new PersonWithType('Diogo', 'Porto');
-const wolf = new AnimalWithType('Wolf');
+// Package Z
+import Person from 'package-x';
+import Animal from 'package-y';
 
-console.log(PersonWithType.isPerson(diogo));
-console.log(PersonWithType.isPerson(wolf));
+const diogo = new Person('Diogo', 'Porto');
+const wolf = new Animal('Gray Wolf');
+
+console.log(Person.isPerson(diogo));
+console.log(Person.isPerson(wolf));
 ```
 
 Running the example above will print:
@@ -65,6 +71,30 @@ Running the example above will print:
 true
 false
 ```
+
+## API
+
+### withIs(Class, { className: name, symbolName: symbol })
+
+###### class
+
+Type: `class`
+
+The class to be enhanced.
+
+###### className
+
+Type: `String`
+
+The name of the class your passing.
+
+###### symbolName
+
+Type: `String`
+
+Unique *id* for the class. This should be name spaced so different classes from different modules do not collide and give false positives.
+
+Example: `@organization/package/class`
 
 ## Tests
 
