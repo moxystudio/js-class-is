@@ -1,4 +1,6 @@
-import withIs from '../src';
+'use strict';
+
+const withIs = require('..');
 
 class Person {
     constructor(name, city) {
@@ -13,18 +15,18 @@ class Animal {
     }
 }
 
-const PersonWithType = withIs(Person, { className: 'Person', symbolName: '@org/package-x/person' });
-const AnimalWithType = withIs(Animal, { className: 'Animal', symbolName: '@org/package-y/animal' });
+const PersonWithIs = withIs(Person, { className: 'Person', symbolName: '@org/package-x/person' });
+const AnimalWithIs = withIs(Animal, { className: 'Animal', symbolName: '@org/package-y/animal' });
 
-const diogo = new PersonWithType('Diogo', 'Porto');
-const wolf = new AnimalWithType('Wolf');
+const diogo = new PersonWithIs('Diogo', 'Porto');
+const wolf = new AnimalWithIs('Wolf');
 
 test('person is an instance of Person class', () => {
-    expect(PersonWithType.isPerson(diogo)).toBe(true);
+    expect(PersonWithIs.isPerson(diogo)).toBe(true);
 });
 
 test('wolf is not an instance of Person class', () => {
-    expect(PersonWithType.isPerson(wolf)).toBe(false);
+    expect(PersonWithIs.isPerson(wolf)).toBe(false);
 });
 
 test('check custom tag of Person class', () => {
