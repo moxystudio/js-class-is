@@ -30,6 +30,8 @@ So the solution is to use symbols.
 
 `$ npm install class-is`
 
+If you want to use this module in the browser you have to compile it yourself to your desired target.
+
 ## Usage
 
 ```js
