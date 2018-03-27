@@ -36,7 +36,7 @@ If you want to use this module in the browser you have to compile it yourself to
 
 ```js
 // Package X
-import withIs from 'class-is';
+const withIs = require('class-is');
 
 class Person {
     constructor(name, city) {
@@ -45,10 +45,10 @@ class Person {
     }
 }
 
-export default withIs(Person, { className: 'Person', symbolName: '@org/package-x/person' });
+module.exports = withIs(Person, { className: 'Person', symbolName: '@org/package-x/person' });
 
 // Package Y
-import withIs from 'class-is';
+const withIs = require('class-is');
 
 class Animal {
     constructor(species) {
@@ -56,11 +56,11 @@ class Animal {
     }
 }
 
-export default withIs(Animal, { className: 'Animal', symbolName: '@org/package-y/animal' });
+module.exports = withIs(Animal, { className: 'Animal', symbolName: '@org/package-y/animal' });
 
 // Package Z
-import Person from 'package-x';
-import Animal from 'package-y';
+const Person = require('package-x');
+const Animal = require('package-y');
 
 const diogo = new Person('Diogo', 'Porto');
 const wolf = new Animal('Gray Wolf');
