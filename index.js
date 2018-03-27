@@ -24,7 +24,7 @@ function withIs(Class, { className, symbolName }) {
         },
     }[className];
 
-    ClassIsWrapper[`is${className}`] = (obj) => obj && Boolean(obj[symbol]);
+    ClassIsWrapper[`is${className}`] = (obj) => obj && Object.getPrototypeOf(obj) && Boolean(obj[symbol]);
 
     return ClassIsWrapper;
 }
