@@ -29,4 +29,32 @@ function withIs(Class, { className, symbolName }) {
     return ClassIsWrapper;
 }
 
+function withIsProto(Class, { className, symbolName }) {
+    const symbol = Symbol.for(symbolName);
+
+    const ClassIsWrapper = {
+        /* eslint-disable object-shorthand */
+        [className]: function (...args) {
+            const _this = Class.call(this, ...args) || this;
+
+            if (_this && !_this[symbol]) {
+                Object.defineProperty(_this, symbol, { value: true });
+            }
+
+            return _this;
+        },
+    }[className];
+
+    Object.defineProperty(ClassIsWrapper.prototype, Symbol.toStringTag, {
+        get() {
+            return className;
+        },
+    });
+
+    ClassIsWrapper[`is${className}`] = (obj) => obj && Boolean(obj[symbol]);
+
+    return ClassIsWrapper;
+}
+
 module.exports = withIs;
+module.exports.proto = withIsProto;

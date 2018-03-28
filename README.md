@@ -34,6 +34,8 @@ If you want to use this module in the browser you have to compile it yourself to
 
 ## Usage
 
+### ES6 classes:
+
 ```js
 // Package X
 const withIs = require('class-is');
@@ -76,6 +78,39 @@ true
 false
 ```
 
+### ES5 and below classes:
+
+In ES5 it's not unusual to see constructors like the one below, so you can call it without using the `new` keyword.
+
+```js
+function Circle(radius) {
+    if (!(this instanceof Circle)) {
+        return new Circle();
+    }
+}
+```
+
+In such cases you can use the `withIs.proto` method:
+
+```js
+const withIs = require('class-is');
+
+const Circle = withIs.proto(function () {
+    if (!(this instanceof Circle)) {
+        return new Circle();
+    }
+}, { className: 'Circle', symbolName: '@org/package/circle' });
+
+const circle = Circle();
+
+console.log(Circle.isCircle(circle));
+```
+
+The example above will print:
+```
+true
+```
+
 ## API
 
 ### withIs(Class, { className: name, symbolName: symbol })
@@ -99,6 +134,11 @@ Type: `String`
 Unique *id* for the class. This should be namespaced so different classes from different modules do not collide and give false positives.
 
 Example: `@organization/package/class`
+
+### withIs.proto(Class, { className: name, symbolName: symbol })
+
+Apply the same parameters as above.
+
 
 ## Tests
 
