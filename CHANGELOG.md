@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/moxystudio/js-class-is/compare/v0.4.0...v0.5.0) (2018-03-28)
+
+
+### Features
+
+* add support to ES5 classes ([0beb84f](https://github.com/moxystudio/js-class-is/commit/0beb84f))
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/moxystudio/js-class-is/compare/v0.3.1...v0.4.0) (2018-03-27)
 
