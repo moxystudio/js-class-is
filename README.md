@@ -18,19 +18,22 @@
 
 Enhances a JavaScript class by adding an `is<Class>` property to compare types between realms.
 
+
 ## Motivation
 
 Checking if a value is an instance of a class in JavaScript is not an easy task.
 
 You can use `instanceof`, but that doesn't work between different realms or different versions. Comparing with `constructor.name` could be a solution but if you need to Uglify the module it doesn't work, as it creates different names for the same module.
 
-So the solution is to use symbols.
+[Symbols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) to the rescue!
+
 
 ## Installation
 
 `$ npm install class-is`
 
 If you want to use this module in the browser you have to compile it yourself to your desired target.
+
 
 ## Usage
 
@@ -48,7 +51,9 @@ class Person {
 }
 
 module.exports = withIs(Person, { className: 'Person', symbolName: '@org/package-x/person' });
+```
 
+```js
 // Package Y
 const withIs = require('class-is');
 
@@ -59,8 +64,9 @@ class Animal {
 }
 
 module.exports = withIs(Animal, { className: 'Animal', symbolName: '@org/package-y/animal' });
+```
 
-// Package Z
+```js
 const Person = require('package-x');
 const Animal = require('package-y');
 
@@ -110,6 +116,7 @@ The example above will print:
 ```
 true
 ```
+
 
 ## API
 
