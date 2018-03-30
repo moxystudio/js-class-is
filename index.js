@@ -24,7 +24,7 @@ function withIs(Class, { className, symbolName }) {
         },
     }[className];
 
-    ClassIsWrapper[`is${className}`] = (obj) => obj && Boolean(obj[symbol]);
+    ClassIsWrapper[`is${className}`] = (obj) => !!(obj && obj[symbol]);
 
     return ClassIsWrapper;
 }
@@ -51,7 +51,7 @@ function withIsProto(Class, { className, symbolName }) {
         },
     });
 
-    ClassIsWrapper[`is${className}`] = (obj) => obj && Boolean(obj[symbol]);
+    ClassIsWrapper[`is${className}`] = (obj) => !!(obj && obj[symbol]);
 
     return ClassIsWrapper;
 }
