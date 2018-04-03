@@ -27,12 +27,16 @@ function withIs(Class, { className, symbolName }) {
     return ClassIsWrapper;
 }
 
-function withIsProto(Class, { className, symbolName }) {
+function withIsProto(Class, { className, symbolName, withoutNew }) {
     const symbol = Symbol.for(symbolName);
 
+    /* eslint-disable object-shorthand */
     const ClassIsWrapper = {
-        /* eslint-disable object-shorthand */
         [className]: function (...args) {
+            if (withoutNew && !(this instanceof ClassIsWrapper)) {
+                return new ClassIsWrapper(...args);
+            }
+
             const _this = Class.call(this, ...args) || this;
 
             if (_this && !_this[symbol]) {
@@ -42,6 +46,10 @@ function withIsProto(Class, { className, symbolName }) {
             return _this;
         },
     }[className];
+    /* eslint-enable object-shorthand */
+
+    ClassIsWrapper.prototype = Object.create(Class.prototype);
+    ClassIsWrapper.prototype.constructor = ClassIsWrapper;
 
     Object.defineProperty(ClassIsWrapper.prototype, Symbol.toStringTag, {
         get() {
