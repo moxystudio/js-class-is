@@ -1,6 +1,6 @@
 {
   "name": "class-is",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Enhances a JavaScript class by adding an is<Class> property to compare types between realms.",
   "keywords": [
     "withis",
