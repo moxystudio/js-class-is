@@ -50,7 +50,10 @@ class Person {
     }
 }
 
-module.exports = withIs(Person, { className: 'Person', symbolName: '@org/package-x/person' });
+module.exports = withIs(Person, {
+    className: 'Person',
+    symbolName: '@org/package-x/Person',
+});
 ```
 
 ```js
@@ -63,7 +66,10 @@ class Animal {
     }
 }
 
-module.exports = withIs(Animal, { className: 'Animal', symbolName: '@org/package-y/animal' });
+module.exports = withIs(Animal, {
+    className: 'Animal',
+    symbolName: '@org/package-y/Animal',
+});
 ```
 
 ```js
@@ -93,6 +99,8 @@ function Circle(radius) {
     if (!(this instanceof Circle)) {
         return new Circle();
     }
+
+    this.radius = radius;
 }
 ```
 
@@ -101,26 +109,38 @@ In such cases you can use the `withIs.proto` method:
 ```js
 const withIs = require('class-is');
 
-const Circle = withIs.proto(function () {
+const Circle = withIs.proto(function (radius) {
     if (!(this instanceof Circle)) {
         return new Circle();
     }
-}, { className: 'Circle', symbolName: '@org/package/circle' });
 
-const circle = Circle();
-
-console.log(Circle.isCircle(circle));
+    this.radius = radius;
+}, {
+    className: 'Circle',
+    symbolName: '@org/package/Circle',
+});
 ```
 
-The example above will print:
-```
-true
+...or even better:
+
+```js
+const withIs = require('class-is');
+
+function Circle(radius) {
+    this.radius = radius;
+}
+
+module.exports = withIs.proto(Circle, {
+    className: 'Circle',
+    symbolName: '@org/package/Circle',
+    withoutNew: true,
+});
 ```
 
 
 ## API
 
-### withIs(Class, { className: name, symbolName: symbol })
+### withIs(Class, { className, symbolName })
 
 ###### class
 
@@ -140,11 +160,18 @@ Type: `String`
 
 Unique *id* for the class. This should be namespaced so different classes from different modules do not collide and give false positives.
 
-Example: `@organization/package/class`
+Example: `@organization/package/Class`
 
-### withIs.proto(Class, { className: name, symbolName: symbol })
+### withIs.proto(Class, { className, symbolName, withoutNew })
 
-Apply the same parameters as above.
+The `className` and `symbolName` parameters are the same as above.
+
+###### withoutNew
+
+Type: `Boolean`   
+Default: `false`
+
+Allow creating an instance without the `new` operator.
 
 
 ## Tests

@@ -1,45 +1,67 @@
 'use strict';
 
-const withIs = require('..');
+const {
+    Animal,
+    Plant,
+    Mammal,
+    Algae,
+} = require('./fixtures/es6');
 
-const Person = withIs(class {
-    constructor(name, city) {
-        this.name = name;
-        this.city = city;
-    }
-}, { className: 'Person', symbolName: '@org/package-x/person' });
+it('should setup the prototype chain correctly', () => {
+    const animal = new Animal('mammal');
+    const plant = new Plant('algae');
 
-const Animal = withIs(class {
-    constructor(species) {
-        this.species = species;
-    }
-}, { className: 'Animal', symbolName: '@org/package-y/person' });
+    expect(Object.getPrototypeOf(animal)).toBe(Animal.prototype);
+    expect(Object.getPrototypeOf(Object.getPrototypeOf(animal))).toBe(Animal.WrappedClass.prototype);
+    expect(Object.getPrototypeOf(animal)).not.toBe(Plant.prototype);
+    expect(Object.getPrototypeOf(plant)).toBe(Plant.prototype);
+    expect(Object.getPrototypeOf(Object.getPrototypeOf(plant))).toBe(Plant.WrappedClass.prototype);
+    expect(Object.getPrototypeOf(plant)).not.toBe(Animal.prototype);
 
-const diogo = new Person('Diogo', 'Porto');
-const wolf = new Animal('Wolf');
+    expect(animal instanceof Animal).toBe(true);
+    expect(animal instanceof Animal.WrappedClass).toBe(true);
+    expect(animal instanceof Plant).toBe(false);
+    expect(plant instanceof Plant).toBe(true);
+    expect(plant instanceof Plant.WrappedClass).toBe(true);
+    expect(plant instanceof Animal).toBe(false);
 
-test('person is an instance of Person class', () => {
-    expect(Person.isPerson(diogo)).toBe(true);
+    expect(animal.getType()).toBe('mammal');
+    expect(plant.getType()).toBe('algae');
 });
 
-test('wolf is not an instance of Person class', () => {
-    expect(Person.isPerson(wolf)).toBe(false);
+it('should have a custom toStringTag', () => {
+    expect(Object.prototype.toString.call(new Animal())).toBe('[object Animal]');
+    expect(Object.prototype.toString.call(new Plant())).toBe('[object Plant]');
 });
 
-test('wolf is an instance of Animal class', () => {
-    expect(Animal.isAnimal(wolf)).toBe(true);
-});
+describe('is<className> method', () => {
+    it('should add a working is<className> static method', () => {
+        const animal = new Animal('mammal');
+        const plant = new Plant('algae');
 
-test('person is not an instance of Animal class', () => {
-    expect(Animal.isAnimal(diogo)).toBe(false);
-});
+        expect(Animal.isAnimal(animal)).toBe(true);
+        expect(Animal.isAnimal(plant)).toBe(false);
+        expect(Plant.isPlant(plant)).toBe(true);
+        expect(Plant.isPlant(animal)).toBe(false);
+    });
 
-test('undefined/null is not an instance of any class', () => {
-    expect(Person.isPerson(undefined)).toBe(false);
-    expect(Person.isPerson(null)).toBe(false);
-});
+    it('should not crash if `null` or `undefined` is passed to is<ClassName>', () => {
+        expect(Animal.isAnimal(null)).toBe(false);
+        expect(Animal.isAnimal(undefined)).toBe(false);
+    });
 
-test('check custom tag of class', () => {
-    expect(Object.prototype.toString.call(diogo)).toBe('[object Person]');
-    expect(Object.prototype.toString.call(wolf)).toBe('[object Animal]');
+    it('should work correctly for deep inheritance scenarios', () => {
+        const mammal = new Mammal();
+        const algae = new Algae();
+
+        expect(Mammal.isMammal(mammal)).toBe(true);
+        expect(Animal.isAnimal(mammal)).toBe(true);
+        expect(Mammal.isMammal(algae)).toBe(false);
+        expect(Animal.isAnimal(algae)).toBe(false);
+
+        expect(Algae.isAlgae(algae)).toBe(true);
+        expect(Plant.isPlant(algae)).toBe(true);
+        expect(Algae.isAlgae(mammal)).toBe(false);
+        expect(Plant.isPlant(mammal)).toBe(false);
+    });
 });
