@@ -97,7 +97,7 @@ In ES5 it's not unusual to see constructors like the one below, so you can call 
 ```js
 function Circle(radius) {
     if (!(this instanceof Circle)) {
-        return new Circle();
+        return new Circle(radius);
     }
 
     this.radius = radius;
@@ -111,7 +111,7 @@ const withIs = require('class-is');
 
 const Circle = withIs.proto(function (radius) {
     if (!(this instanceof Circle)) {
-        return new Circle();
+        return new Circle(radius);
     }
 
     this.radius = radius;
