@@ -1,6 +1,6 @@
 # class-is
 
-[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url] [![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url] 
 
 [npm-url]:https://npmjs.org/package/class-is
 [downloads-image]:http://img.shields.io/npm/dm/class-is.svg
@@ -13,8 +13,6 @@
 [david-dm-image]:https://img.shields.io/david/moxystudio/js-class-is.svg
 [david-dm-dev-url]:https://david-dm.org/moxystudio/js-class-is?type=dev
 [david-dm-dev-image]:https://img.shields.io/david/dev/moxystudio/js-class-is.svg
-[greenkeeper-image]:https://badges.greenkeeper.io/moxystudio/js-class-is.svg
-[greenkeeper-url]:https://greenkeeper.io/
 
 Enhances a JavaScript class by adding an `is<Class>` property to compare types between realms.
 
