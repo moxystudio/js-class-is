@@ -3,10 +3,10 @@
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url]
 
 [npm-url]:https://npmjs.org/package/class-is
-[downloads-image]:http://img.shields.io/npm/dm/class-is.svg
-[npm-image]:http://img.shields.io/npm/v/class-is.svg
+[downloads-image]:https://img.shields.io/npm/dm/class-is.svg
+[npm-image]:https://img.shields.io/npm/v/class-is.svg
 [travis-url]:https://travis-ci.org/moxystudio/js-class-is
-[travis-image]:http://img.shields.io/travis/moxystudio/js-class-is/master.svg
+[travis-image]:https://img.shields.io/travis/moxystudio/js-class-is/master.svg
 [codecov-url]:https://codecov.io/gh/moxystudio/js-class-is
 [codecov-image]:https://img.shields.io/codecov/c/github/moxystudio/js-class-is/master.svg
 [david-dm-url]:https://david-dm.org/moxystudio/js-class-is
@@ -180,4 +180,4 @@ Allow creating an instance without the `new` operator.
 
 ## License
 
-[MIT](http://www.opensource.org/licenses/mit-license.php)
+[MIT](https://www.opensource.org/licenses/mit-license.php)
