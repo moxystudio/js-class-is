@@ -65,3 +65,10 @@ describe('is<className> method', () => {
         expect(Plant.isPlant(mammal)).toBe(false);
     });
 });
+
+describe('it satisfies deep.equal', () => {
+    it('should satisfy deep equality with duck typed object', () => {
+        expect(new Animal.WrappedClass('cat')).toEqual({ type: 'cat' });
+        expect(new Animal('cat')).toEqual({ type: 'cat' });
+    });
+});
